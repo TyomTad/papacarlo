@@ -1,0 +1,104 @@
+#include <iostream>
+#include <fstream>
+#include <sstream>
+//Գրում է ֆայլի մեջ
+/*
+void writing_in_file(const std::string& file_name, const std::string& str) {
+    std::ofstream f1;
+    f1.open(file_name);
+    if (f1.is_open()) {
+        f1 << str << std::endl;
+        f1.close();
+    }
+}
+*/
+//կարդում է տողառտող
+/*
+void reading_from_file(const std::string& file_name) {
+    std::string line;
+    std::ifstream in(file_name);
+    if (in.is_open()) {
+        while (std::getline(in, line)) {
+            std::cout << line << std::endl;
+        }
+        in.close();
+    }
+}
+*/
+/*
+void remove_second_line(const std::string& file_name){
+
+    std::ifstream inFile(file_name);
+    std::ofstream outFile("out.txt");
+    std::string line;
+    int lineCount = 0;
+
+    while (std::getline(inFile,line)) {
+        if (lineCount % 2 == 0) {
+            outFile << line << std::endl;
+        }
+        lineCount++;
+    }
+    outFile.close();
+    inFile.close();
+
+    std::ifstream File("out.txt");
+    if(File.is_open()){
+        while(std::getline(File,line)){
+            std::cout << line << std::endl;
+        }
+    }
+    File.close();
+}*/
+void reverse_words_in_lines(const std::string& file_name) {
+    std::ifstream inFile(file_name);
+    std::ofstream outFile("temp.txt");
+
+    if (!inFile.is_open() || !outFile.is_open()) {
+        std::cerr << "Error opening files." << std::endl;
+        return;
+    }
+
+    std::string line;
+    while (std::getline(inFile, line)) {
+        std::istringstream iss(line);
+        std::string word;
+        std::string reversedLine;
+
+        while (iss >> word) {
+            if (!reversedLine.empty()) {
+                reversedLine = word + " " + reversedLine;
+            } else {
+                reversedLine = word;
+            }
+        }
+
+        outFile << reversedLine << std::endl;
+    }
+
+    inFile.close();
+    outFile.close();
+
+    if (std::remove(file_name.c_str()) != 0) {
+        std::cerr << "Error deleting file." << std::endl;
+        return;
+    }
+
+    if (std::rename("temp.txt", file_name.c_str()) != 0) {
+        std::cerr << "Error renaming file." << std::endl;
+        return;
+    }
+
+    std::cout << "Words in each line have been reversed in the file." << std::endl;
+}
+
+int main() {
+    std::string str = "adssfdghgffddsa";
+    std::string filename = "text.txt";
+
+   // writing_in_file(filename, str);
+   // reading_from_file(filename);
+   // remove_second_line("text.txt");
+    reverse_words_in_lines("text.txt");
+    return 0;
+}
