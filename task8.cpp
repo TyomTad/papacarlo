@@ -6,9 +6,9 @@ class Shape {
 };
 class Cricle:public Shape{
         double pi = 3.14;
-        int radius = 4;
+        double radius = 4.0;
    public:
-    int calculet() override{
+    double calculet() override{
         return pi * radius * radius;
     }
 };
@@ -39,3 +39,4 @@ int main(){
 
     return 0;
 }
+`
