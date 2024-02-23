@@ -6,22 +6,33 @@ class Book {
         std::string autor;
         int ISBN;
     public:
-        void set(std::string name,std::string aut,int isbn){
+        void set_name(std::string name){
             name_book = name;
-            autor = aut;
-            ISBN = isbn;
         }
-        void get(){
-            std::cout <<"Book name is: "<< name_book << std::endl;
-            std::cout << "Autor name: " << autor << std::endl;
-            std::cout << "ISBN : " << ISBN << std::endl;
+        void set_autor(std::string aut){
+            autor = aut;
+        }
+        void set_isb(int isb){
+            ISBN = isb;
+        }
+        std::string get_name(){
+            return name_book;
+        }
+        std::string get_autor(){
+            return autor;
+        }
+        int get_isb(){
+            return ISBN;
         }
 };
 
 int main(){
     Book obj;
-    obj.set("Best Book","Sensey",15);
-    obj.get();
-    
+    obj.set_name("Best Book");
+    obj.set_autor("Sensey");
+    obj.set_isb(15);
+    std::cout << obj.get_name() << std::endl;
+    std::cout << obj.get_autor() << std::endl;
+    std::cout << obj.get_isb() << std::endl;
     return 0;
 }
