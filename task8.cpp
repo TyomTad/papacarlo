@@ -2,25 +2,22 @@
 #include <cmath>
 class Shape {
     public:
-        int a = 3;
-        int b = 4;
-        int c = 5;
-        int pi = 3.14;
-        int r = 5;
         virtual int calculet() = 0;
 };
 class Cricle:public Shape{
-   public: 
+        double pi = 3.14;
+        int radius = 4;
+   public:
     int calculet() override{
-        int P = (pow(3,2) + pow(4,2))/2;
-        return P;
+        return pi * radius * radius;
     }
 };
 class Retangle:public Shape{
+        int a = 4;
+        int b = 3;
   public:
     int calculet() override{
-        int Pi = pow((pi * r),2);
-        return Pi;
+        return a * b;
     }
 };
 int main(){
@@ -39,6 +36,6 @@ int main(){
         Cricle obj1;
         std::cout << obj1.calculet() << std::endl;
     }
-    
+
     return 0;
 }
